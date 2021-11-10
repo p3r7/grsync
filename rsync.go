@@ -7,6 +7,7 @@ import (
 	"os/exec"
 	"strconv"
 	"strings"
+	"syscall"
 )
 
 // Rsync is wrapper under rsync
@@ -203,6 +204,10 @@ func (r Rsync) StdoutPipe() (io.ReadCloser, error) {
 // standard error when the command starts.
 func (r Rsync) StderrPipe() (io.ReadCloser, error) {
 	return r.cmd.StderrPipe()
+}
+
+func (r Rsync) SetSysProcAttr(attr *syscall.SysProcAttr) {
+	r.cmd.SysProcAttr = attr
 }
 
 // Run start rsync task

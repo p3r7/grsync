@@ -6,6 +6,7 @@ import (
 	"math"
 	"strconv"
 	"strings"
+	"syscall"
 )
 
 // Task is high-level API under rsync
@@ -76,6 +77,10 @@ func NewTask(source, destination string, rsyncOptions RsyncOptions) *Task {
 		state: &State{},
 		log:   &Log{},
 	}
+}
+
+func (t *Task) SetSysProcAttr(attr *syscall.SysProcAttr) {
+	t.rsync.SetSysProcAttr(attr)
 }
 
 func processStdout(task *Task, stdout io.Reader) {
