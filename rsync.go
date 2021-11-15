@@ -580,7 +580,7 @@ func getArguments(options RsyncOptions) []string {
 	}
 
 	if options.IdentityFile != "" {
-		arguments = append(arguments, "-e", fmt.Sprintf("\"ssh -i %s\"", options.IdentityFile))
+		arguments = append(arguments, "-e", fmt.Sprintf("ssh -i %s", options.IdentityFile))
 	}
 
 	return arguments
